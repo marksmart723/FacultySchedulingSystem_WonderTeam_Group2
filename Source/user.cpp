@@ -1,8 +1,8 @@
-#include "User.h"
+#include "../Headers/user.h"
 #include <iostream>
 #include <fstream>
 
-const std::string filename = "users.txt";
+const std::string filename = "UserInfos.txt";
 
 User::User() : role("Guest") {
     loggedIn = false;
@@ -47,8 +47,8 @@ bool User::login(const std::string& uname, const std::string& pwd) {
             username = uname;
             password = pwd;
             loggedIn = true;
-            file.close();
             return true;
+            file.close();
         }
     }
     std::cout << "Invalid username or password.\n";
@@ -64,6 +64,8 @@ void User::changeRole(std::string& rl) {
     role = rl;
 }
 
+
 bool User::isLoggedIn() {
     return loggedIn;
 }
+

@@ -1,8 +1,7 @@
-#ifndef USER_H
-#define USER_H
+#pragma once
 
 #include <string>
-#include "Role.h"
+#include "role.h"
 
 
 class User {
@@ -23,4 +22,3 @@ public:
     bool isLoggedIn();
 };
 
-#endif
