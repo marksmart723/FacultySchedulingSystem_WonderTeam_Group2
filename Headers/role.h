@@ -53,12 +53,11 @@ public:
 			//default:
 				  //std::cout << "Not a valid role" << std::endl;
 		}
-
-
-
 	}
 
 
-
+	std::string getRole() const {
+		return role;
+	}
 
 };

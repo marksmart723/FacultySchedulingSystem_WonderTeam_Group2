@@ -18,9 +18,11 @@ void Menu::promptLogin()
     std::cout << "Please enter your password: ";
     std::cin >> password;
 
-    if(currentUser.login(username, password))
-        std::cout << "You have logged in as: " << username << "\n\n";
-        return;
+    if (currentUser.login(username, password))
+    {
+        std::cout << "You have logged in as: " << username << std::endl;
+        std::cout << "Your Role: " << currentUser.getRoleName() << std::endl;
+    }
     return;
 }
 
