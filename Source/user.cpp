@@ -42,8 +42,8 @@ bool User::login(const std::string& uname, const std::string& pwd) {
             role = storedRole;
             username = uname;
             password = pwd;
-            file.close();
             return true;
+            file.close();
         }
     }
     std::cout << "Invalid username or password.\n";
