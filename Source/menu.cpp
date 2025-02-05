@@ -1,8 +1,8 @@
 #include "../Headers/menu.h"
 
-Menu(): loggedIn(false) {}
+Menu::Menu(): loggedIn(false) {}
 
-void promptLogin()
+void Menu::promptLogin()
 {
     std::string username;
     std::string password;
@@ -24,7 +24,7 @@ void promptLogin()
     return;
 }
 
-void promptMenuInteraction()
+void Menu::promptMenuInteraction()
 {
     int actionNum;
     std::cout << "Please select an option by entering the corresponding number: \n";
@@ -46,16 +46,19 @@ void promptMenuInteraction()
         }
 }
 
-void displayAvailableActions(std::string role); //to do, awaiting role class
+void Menu::displayAvailableActions(std::string role)
+{
 
-void logout()
+} //to do, awaiting role class
+
+void Menu::logout()
 {
     currentUser = User();
     loggedIn = false;
     promptLogin();
 }
 
-void displayMenu()
+void Menu::displayMenu()
 {
     while(!loggedIn)
         promptLogin();

@@ -1,6 +1,6 @@
-#include "../Headers/user.h"
-
+#include "../Headers/menu.h"
 int main()
 {
-    
+    Menu temp;
+    temp.promptLogin();
 }
