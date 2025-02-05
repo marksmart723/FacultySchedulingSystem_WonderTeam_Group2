@@ -1,12 +1,12 @@
 #include "../Headers/menu.h"
 
-Menu::Menu(): loggedIn(false) {}
+Menu::Menu() {}
 
 void Menu::promptLogin()
 {
     std::string username;
     std::string password;
-    if(loggedIn)
+    if(currentUser.isLoggedIn())
     {
         std::cout << "Error, you have already logged in." << std::endl;
         return;
@@ -34,7 +34,7 @@ void Menu::promptMenuInteraction()
 
     switch (actionNum) {
             case 1:
-                displayAvailableActions(currentUser.getRole());
+                // displayAvailableActions(role);
                 std::cout << "\n\n\n";  
                 break;
             case 2:
@@ -48,18 +48,17 @@ void Menu::promptMenuInteraction()
 
 void Menu::displayAvailableActions(std::string role)
 {
-
+    
 } //to do, awaiting role class
 
 void Menu::logout()
 {
     currentUser = User();
-    loggedIn = false;
     promptLogin();
 }
 
 void Menu::displayMenu()
 {
-    while(!loggedIn)
+    while(!currentUser.isLoggedIn())
         promptLogin();
 }

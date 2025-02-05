@@ -6,7 +6,6 @@
 class Menu
 {
 private:
-    bool loggedIn; 
     User currentUser; 
 
 public:
