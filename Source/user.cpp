@@ -67,7 +67,7 @@ void User::changeRole(std::string& rl) {
     role = rl;
 }
 
-bool User::isLoggedIn() {
-    if()
+// bool User::isLoggedIn() {
+    
 
-}
+// }
