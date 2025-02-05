@@ -1,5 +1,4 @@
-#ifndef USER_H
-#define USER_H
+#pragma once
 
 #include <string>
 
@@ -19,4 +18,3 @@ public:
     bool isLoggedIn();
 };
 
-#endif
