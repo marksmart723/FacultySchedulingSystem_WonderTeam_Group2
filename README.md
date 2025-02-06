@@ -6,6 +6,7 @@ The Faculty Scheduling Software System will be a desktop application developed t
 Our WIP limits are unlimited tasks allowed for the todo, three tasks for in progres, two tasks in review and unlimited tasks in our done tasks. 
 
 Team: 
+    
     Mark:
 
     Natalie:
