@@ -8,7 +8,7 @@ void Menu::promptLogin()
     std::string password;
     if(currentUser.isLoggedIn()) // Edge case if somebody call the function in code while already logged in. 
     {
-        std::cout << "Error, you have already logged in.\n\n"
+        std::cout << "Error, you have already logged in.\n\n";
         return;
     }
     std::cout << "Weclome to the Faculty Scheduling System!" << "\n\n";
@@ -28,7 +28,8 @@ bool Menu::promptMenuInteraction()
 {
     int actionNum;
     std::cout << "Please select an option by entering the corresponding number:\n\n";
-    std::cout << "1. Display my available actions\n" << "2. Log out\n\n";
+    std::cout << "1. Display my available actions\n";
+    std::cout << "2. Log out\n\n";
     std::cout << "Enter your selection: ";
     std::cin >> actionNum;
 
@@ -62,5 +63,5 @@ void Menu::displayMenu()
 {
     while(!currentUser.isLoggedIn())
         promptLogin();
-    while(!promptMenuInteracton());
+    while(!promptMenuInteraction());
 }
