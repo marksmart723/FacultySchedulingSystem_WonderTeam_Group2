@@ -19,11 +19,16 @@ private:
 	std::map<std::string, roleName> roleMap;
 
 public:
-	Role(std::string r);
+    // default constructor, creates a Role object with minimum permitions (TempFaculty)
+    Role();
+    // parametrized constructor, uses string rName representing the role to create a Role object with the according permitions 
+	Role(std::string);
 	
-
+    // accessor. Returns a vector of strings of permittions
 	std::vector<std::string> getPermitions();
 	
+	// accessor. Returns a string with the current Role
+	std::string getRole() const;
 
 };
 

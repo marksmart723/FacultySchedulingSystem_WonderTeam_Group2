@@ -1,10 +1,20 @@
 #include "role.h"
 
-Role::Role(std::string r)
+Role::Role()
 {
-	role = r;
+    role = "TempFaculty";
+    roleMap = { {"RegFaculty", RegularFaculty}, {"TempFaculty", TemporaryFaculty}, {"Chair", DepartmentChair}, {"Dean", Dean} };
+	id = roleMap[role];
+    permitions = { 1, 0, 0, 0, 0, 0 };
+    permitionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
+
+}
+
+Role::Role(std::string rName)
+{
+	role = rName;
 	roleMap = { {"RegFaculty", RegularFaculty}, {"TempFaculty", TemporaryFaculty}, {"Chair", DepartmentChair}, {"Dean", Dean} };
-	id = roleMap[r];
+	id = roleMap[rName];
 	permitionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
 
 	switch (id)
@@ -38,4 +48,9 @@ std::vector<std::string> Role::getPermitions()
 		}
 	}
 	return toReturn;
+}
+
+std::string Role::getRole() const
+{
+	return role;
 }
