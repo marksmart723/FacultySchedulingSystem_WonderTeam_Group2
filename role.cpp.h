@@ -6,8 +6,8 @@ Role::Role()	//  creates an empty Role object with no permissions
     role = "";
     roleMap = { {"RegFaculty", RegularFaculty}, {"TempFaculty", TemporaryFaculty}, {"Chair", DepartmentChair}, {"Dean", Dean} };
 	id = -1;
-    permitions = { 0, 0, 0, 0, 0, 0 };
-    permitionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
+    permissions = { 0, 0, 0, 0, 0, 0 };
+    permissionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
 
 }
 
@@ -26,21 +26,21 @@ Role::Role(std::string rName)
 	}
 	
 	role = rName;
-	permitionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
+	permissionNames = { "View My Schedule", "Request Changes", "Create a Schedule", "Modify a Schedule", "View all Schedules", "Generate Reports" };
 	// assignes approptiate permitions for the role
 	switch (id)
 	{
 	case 0:
-		permitions = { 1, 1, 0, 0, 0, 0 };	// RegFaculty : View My Schedule, Request Changes
+		permissions = { 1, 1, 0, 0, 0, 0 };	// RegFaculty : View My Schedule, Request Changes
 		break;
 	case 1:
-		permitions = { 1, 0, 0, 0, 0, 0 };	// TempFaculty : View My Schedule
+		permissions = { 1, 0, 0, 0, 0, 0 };	// TempFaculty : View My Schedule
 		break;
 	case 2:
-		permitions = { 0, 0, 1, 1, 0, 0 };	// Chair : Create a Schedule, Modify a Schedule
+		permissions = { 0, 0, 1, 1, 0, 0 };	// Chair : Create a Schedule, Modify a Schedule
 		break;
 	case 3:
-		permitions = { 0, 0, 0, 0, 1, 1 };	// Dean : View all Schedules, Generate Reports
+		permissions = { 0, 0, 0, 0, 1, 1 };	// Dean : View all Schedules, Generate Reports
 		break;
 	default:
 		std::cout << "Not a valid role" << std::endl;
@@ -49,14 +49,14 @@ Role::Role(std::string rName)
 }
 
 // accessor. Returns a const vector of strings of permitions
-const std::vector<std::string> Role::getPermitions() const
+const std::vector<std::string> Role::getPermissions() const
 {
 	std::vector<std::string> toReturn;		// creates an empty vector
-	for (int i = 0; i < permitionNames.size(); i++)
+	for (int i = 0; i < permissionNames.size(); i++)
 	{
-		if (permitions[i] == 1)				// populates vector toReturn with appropriate permitions 
+		if (permissions[i] == 1)				// populates vector toReturn with appropriate permitions 
 		{
-			toReturn.push_back(permitionNames[i]);
+			toReturn.push_back(permissionNames[i]);
 		}
 	}
 	return toReturn;
@@ -85,16 +85,16 @@ bool Role::changeRole(std::string newRole)
 		switch (id)
 		{
 		case 0:
-			permitions = { 1, 1, 0, 0, 0, 0 };	// RegFaculty : View My Schedule, Request Changes
+			permissions = { 1, 1, 0, 0, 0, 0 };	// RegFaculty : View My Schedule, Request Changes
 			break;
 		case 1:
-			permitions = { 1, 0, 0, 0, 0, 0 };	// TempFaculty : View My Schedule
+			permissions = { 1, 0, 0, 0, 0, 0 };	// TempFaculty : View My Schedule
 			break;
 		case 2:
-			permitions = { 0, 0, 1, 1, 0, 0 };	// Chair : Create a Schedule, Modify a Schedule
+			permissions = { 0, 0, 1, 1, 0, 0 };	// Chair : Create a Schedule, Modify a Schedule
 			break;
 		case 3:
-			permitions = { 0, 0, 0, 0, 1, 1 };	// Dean : View all Schedules, Generate Reports
+			permissions = { 0, 0, 0, 0, 1, 1 };	// Dean : View all Schedules, Generate Reports
 			break;
 		default:
 			std::cout << "Not a valid role" << std::endl;
