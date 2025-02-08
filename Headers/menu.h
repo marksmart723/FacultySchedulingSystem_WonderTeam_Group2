@@ -1,8 +1,9 @@
 #pragma once
 
+#include <user.h>
 #include <string>
-#include "user.h"
 #include <iostream>
+
 class Menu
 {
 private:
@@ -10,14 +11,9 @@ private:
 
 public:
     Menu();
-
     void promptLogin();
-
-    void promptMenuInteraction();
-
+    bool promptMenuInteraction();
     void displayAvailableActions(std::string role); //to do, awaiting role class
-
     void logout();
-
     void displayMenu();
 };

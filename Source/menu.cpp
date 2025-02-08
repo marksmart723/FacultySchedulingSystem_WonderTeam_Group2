@@ -6,46 +6,45 @@ void Menu::promptLogin()
 {
     std::string username;
     std::string password;
-    if(currentUser.isLoggedIn())
+    if(currentUser.isLoggedIn()) // Edge case if somebody call the function in code while already logged in. 
     {
-        std::cout << "Error, you have already logged in." << std::endl;
+        std::cout << "Error, you have already logged in.\n\n";
         return;
     }
     std::cout << "Weclome to the Faculty Scheduling System!" << "\n\n";
     std::cout << "Please enter your username: ";
     std::cin >> username;
-    std::cout << std::endl;
     std::cout << "Please enter your password: ";
     std::cin >> password;
 
-    if (currentUser.login(username, password))
-    {
-        std::cout << "You have logged in as: " << username << std::endl;
-        std::cout << "Your Role: " << currentUser.getRoleName() << std::endl;
-    }
+    if(currentUser.login(username, password))
+        std::cout << "\n\nYou have logged in as: " << username << "\n\n";
+    else 
+        std::cout << "Login unsuccessful.\n\n";
     return;
 }
 
-void Menu::promptMenuInteraction()
+bool Menu::promptMenuInteraction()
 {
     int actionNum;
-    std::cout << "Please select an option by entering the corresponding number: \n";
-    std::cout << "1. Display my available actions" << "2. Log out.";
+    std::cout << "Please select an option by entering the corresponding number:\n\n";
+    std::cout << "1. Display my available actions\n";
+    std::cout << "2. Log out\n\n";
     std::cout << "Enter your selection: ";
     std::cin >> actionNum;
 
     switch (actionNum) {
             case 1:
                 // displayAvailableActions(role);
-                std::cout << "\n\n\n";  
                 break;
             case 2:
                 logout();
-                std::cout << "\n\n\n";  
                 break;
             default:
-                std::cout << "Invalid selection. Please try again." << std::endl;
+                std::cout << "Invalid selection. Please try again.\n\n";
+                return false;
         }
+    return true;
 }
 
 void Menu::displayAvailableActions(std::string role)
@@ -55,12 +54,14 @@ void Menu::displayAvailableActions(std::string role)
 
 void Menu::logout()
 {
-    currentUser = User();
-    promptLogin();
+    std::cout << "User <" << currentUser.getUserName() << "> have logged out.\n\n";
+    currentUser = User(); //reinitialize currentUser class member. 
+    displayMenu();
 }
 
 void Menu::displayMenu()
 {
     while(!currentUser.isLoggedIn())
         promptLogin();
+    while(!promptMenuInteraction());
 }
