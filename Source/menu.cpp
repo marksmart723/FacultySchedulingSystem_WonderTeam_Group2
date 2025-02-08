@@ -6,7 +6,7 @@ void Menu::promptLogin()
 {
     std::string username;
     std::string password;
-    if(currentUser.isLoggedIn()) // Edge case if somebody call the function in code while already logged in. 
+    if (currentUser.isLoggedIn()) // Edge case if somebody call the function in code while already logged in. 
     {
         std::cout << "Error, you have already logged in.\n\n";
         return;
@@ -17,9 +17,10 @@ void Menu::promptLogin()
     std::cout << "Please enter your password: ";
     std::cin >> password;
 
-    if(currentUser.login(username, password))
+    if (currentUser.login(username, password))
         std::cout << "\n\nYou have logged in as: " << username << "\n\n";
-    else 
+
+    else
         std::cout << "Login unsuccessful.\n\n";
     return;
 }
@@ -34,23 +35,26 @@ bool Menu::promptMenuInteraction()
     std::cin >> actionNum;
 
     switch (actionNum) {
-            case 1:
-                // displayAvailableActions(role);
-                break;
-            case 2:
-                logout();
-                break;
-            default:
-                std::cout << "Invalid selection. Please try again.\n\n";
-                return false;
-        }
+    case 1:
+        displayAvailableActions();
+        break;
+    case 2:
+        logout();
+        break;
+    default:
+        std::cout << "Invalid selection. Please try again.\n\n";
+        return false;
+    }
     return true;
 }
 
-void Menu::displayAvailableActions(std::string role)
+void Menu::displayAvailableActions() 
 {
-    
-} //to do, awaiting role class
+    const std::vector<std::string>& permissions = currentUser.getRole().getPermissions();
+    for (const std::string& permission : permissions) {
+        std::cout << permission << std::endl;
+    }
+}
 
 void Menu::logout()
 {
@@ -61,7 +65,7 @@ void Menu::logout()
 
 void Menu::displayMenu()
 {
-    while(!currentUser.isLoggedIn())
+    while (!currentUser.isLoggedIn())
         promptLogin();
-    while(!promptMenuInteraction());
+    while (!promptMenuInteraction());
 }
