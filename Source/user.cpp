@@ -1,4 +1,4 @@
-#include "../Headers/user.h"
+#include "user.h"
 #include <iostream>
 #include <fstream>
 
@@ -69,7 +69,7 @@ bool User::isLoggedIn() {
     return loggedIn;
 }
 
-std::string User::getRoleName() const {
+std::string User::getRolename() const {
     return role.getRole();
 }
 
