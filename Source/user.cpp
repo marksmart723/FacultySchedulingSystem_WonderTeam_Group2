@@ -4,7 +4,7 @@
 
 const std::string filename = "UserInfos.txt";
 
-User::User() : role("Guest") {
+User::User() {
     loggedIn = false;
 }
 
@@ -25,6 +25,7 @@ bool User::addUser(const std::string& uname, const std::string& pwd, const std::
     file.close();
     std::ofstream file1(filename, std::ios::app);
     file1 << uname << " " << pwd << " " << rl << "\n";
+    role = Role(rl);
     username = uname;
     password = pwd;
     loggedIn = true;
@@ -43,12 +44,12 @@ bool User::login(const std::string& uname, const std::string& pwd) {
     while (file >> storedUname >> storedPwd >> storedRole) {
         if (uname == storedUname && pwd == storedPwd) {
             std::cout << "Login successful." << "\n";
-            Role role(storedRole);
+            role = Role(storedRole);
             username = uname;
             password = pwd;
             loggedIn = true;
-            return true;
             file.close();
+            return true;
         }
     }
     std::cout << "Invalid username or password.\n";
@@ -61,11 +62,18 @@ std::string User::getUsername() {
 }
 
 void User::changeRole(std::string& rl) {
-    role = rl;
+    role = Role(rl);
 }
-
 
 bool User::isLoggedIn() {
     return loggedIn;
+}
+
+std::string User::getRoleName() const {
+    return role.getRole();
+}
+
+const Role& User::getRole() const {
+    return role;
 }
 
