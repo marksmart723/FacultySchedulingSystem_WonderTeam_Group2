@@ -74,7 +74,7 @@ int Menu::promptActionSelection()
         clearConsole();
         displayRBACHeader();
         std::cout << "User <" << currentUser.getUsername() << "> Available actions:\n\n";
-        for (size_t i = 0; i < permissions.size(); ++i) {
+        for (int i = 0; i < permissions.size(); i++) { //get all available actions. May change in the future.
             std::cout << i + 1 << ". " << permissions[i] << "\n";
         }
         std::cout << "\nSelect an action by entering its number: ";
