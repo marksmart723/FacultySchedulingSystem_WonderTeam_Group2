@@ -7,7 +7,7 @@
 #include <iostream>
 
 enum roleName
-{RegularFaculty,TemporaryFaculty,DepartmentChair,Dean}
+{RegularFaculty,TemporaryFaculty,DepartmentChair,Dean};
 
 class Role
 {

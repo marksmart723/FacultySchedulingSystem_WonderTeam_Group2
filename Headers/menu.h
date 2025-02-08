@@ -1,19 +1,21 @@
 #pragma once
 
-#include <user.h>
+#include "user.h"
 #include <string>
 #include <iostream>
 
 class Menu
 {
 private:
-    User currentUser; 
+    User currentUser;
+    std::vector<std::string> permissions;
 
 public:
     Menu();
     void promptLogin();
-    bool promptMenuInteraction();
-    void displayAvailableActions();
+    int promptMenuInteraction();
+    int promptActionSelection();
+    void executeAction(int num);
     void logout();
     void displayMenu();
 };

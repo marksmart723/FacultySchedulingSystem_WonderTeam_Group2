@@ -1,65 +1,95 @@
 #include "menu.h"
 
-Menu::Menu() {}
+#include <windows.h>
+#include <cstdlib>
 
-void Menu::promptLogin()
+Menu::Menu(): permissions() {}
+
+void clearConsole()
 {
+    Sleep(700);
+    std::system("cls");
+}
+
+void cinClear()
+{
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
+}
+
+void Menu::promptLogin() {
+    clearConsole();
+
     std::string username;
     std::string password;
-    if (currentUser.isLoggedIn()) // Edge case if somebody call the function in code while already logged in. 
-    {
-        std::cout << "Error, you have already logged in.\n\n";
-        return;
-    }
-    std::cout << "Weclome to the Faculty Scheduling System!" << "\n\n";
+
+    std::cout << "RBAC: Welcome to the Faculty Scheduling System!" << "\n\n";
     std::cout << "Please enter your username: ";
     std::cin >> username;
     std::cout << "Please enter your password: ";
     std::cin >> password;
-
-    if (currentUser.login(username, password))
-        std::cout << "\n\nYou have logged in as: " << username << "\n\n";
-
-    else
-        std::cout << "Login unsuccessful.\n\n";
-    return;
+    std::cout << std::endl;
+    if (currentUser.login(username, password)) {
+        std::cout << "RBAC: You have logged in as user <" << username << ">";
+        permissions = currentUser.getRole().getPermissions();
+    } else
+        std::cout << "RBAC: Login unsuccessful.";
+    std::cout << "\n\n";
 }
 
-bool Menu::promptMenuInteraction()
+int Menu::promptMenuInteraction()
 {
     int actionNum;
-    std::cout << "Please select an option by entering the corresponding number:\n\n";
-    std::cout << "1. Display my available actions\n";
-    std::cout << "2. Log out\n\n";
-    std::cout << "Enter your selection: ";
-    std::cin >> actionNum;
+    while (true)
+    {
+        clearConsole();
+        std::cout << "RBAC: Please select an option by entering the corresponding number:\n\n";
+        std::cout << "1. Display my available actions\n";
+        std::cout << "2. Log out\n\n";
+        std::cout << "Enter your selection: ";
+        std::cin >> actionNum;
 
-    switch (actionNum) {
-    case 1:
-        displayAvailableActions();
-        break;
-    case 2:
-        logout();
-        break;
-    default:
-        std::cout << "Invalid selection. Please try again.\n\n";
-        return false;
-    }
-    return true;
-}
-
-void Menu::displayAvailableActions() 
-{
-    const std::vector<std::string>& permissions = currentUser.getRole().getPermissions();
-    for (const std::string& permission : permissions) {
-        std::cout << permission << std::endl;
+        if (std::cin.fail() || actionNum < 1 || actionNum > 2)
+        {
+            cinClear();
+            std::cout << "\nInvalid input or selection. Please try again.";
+            continue;
+        }
+        return actionNum;
     }
 }
 
-void Menu::logout()
+int Menu::promptActionSelection()
 {
-    std::cout << "User <" << currentUser.getUsername() << "> have logged out.\n\n";
-    currentUser = User(); //reinitialize currentUser class member. 
+    int actionNum;
+    while (true) {
+        clearConsole();
+        std::cout << "User <" << currentUser.getUsername() << "> Available actions:\n\n";
+        for (size_t i = 0; i < permissions.size(); ++i) {
+            std::cout << i + 1 << ". " << permissions[i] << "\n";
+        }
+        std::cout << "\nSelect an action by entering its number: ";
+        std::cin >> actionNum;
+
+        if (std::cin.fail() || actionNum < 1 || actionNum > permissions.size()) {
+            cinClear();
+            std::cout << "\nInvalid selection. Please try again.";
+            clearConsole();
+            continue;
+        }
+        return actionNum;
+    }
+}
+
+void Menu::executeAction(int num) {
+    clearConsole();
+    std::cout << "Executing action: " << permissions[num-1];
+}
+
+void Menu::logout() {
+    clearConsole();
+    std::cout << "User <" << currentUser.getUsername() << "> have logged out.";
+    currentUser = User(); //reinitialize currentUser class member.
     displayMenu();
 }
 
@@ -67,5 +97,18 @@ void Menu::displayMenu()
 {
     while (!currentUser.isLoggedIn())
         promptLogin();
-    while (!promptMenuInteraction());
+    while (true) {
+        int menuChoice = promptMenuInteraction();
+        if (menuChoice == 2) {  //User wants to log out
+            logout();
+            return;
+        }
+        if (menuChoice == 1) {
+            int action = -1;
+            while (action < 1) { //Ensure valid action
+                action = promptActionSelection();
+            }
+            executeAction(action);
+        }
+    }
 }
