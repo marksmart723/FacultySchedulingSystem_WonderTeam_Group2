@@ -18,7 +18,7 @@ public:
     void promptLogin(); //Ask user to enter their login information.
     int promptMenuInteraction(); //Ask user which menu choice they want. Return the choice.
     int promptActionSelection(); //Ask user which action choice they want. Return the choice.
-    void executeAction(int num); //Use the returned value from promptActionSelection. Execute the permissions.
+    void executeAction(int num) const; //Use the returned value from promptActionSelection. Execute the permissions.
     void logout(); //Reinitialize the currentUser private member.
     void displayMenu(); //Start the menu.
 };

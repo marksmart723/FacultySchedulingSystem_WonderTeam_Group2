@@ -14,7 +14,7 @@ void displayRBACHeader()
 
 void clearConsole()
 {
-    Sleep(600);
+    Sleep(400);
     std::system("cls");
 }
 
@@ -77,10 +77,12 @@ int Menu::promptActionSelection()
         for (int i = 0; i < permissions.size(); i++) { //get all available actions. May change in the future.
             std::cout << i + 1 << ". " << permissions[i] << "\n";
         }
+
+        std::cout << "\n0. Go back to previous page\n";
         std::cout << "\nSelect an action by entering its number: ";
         std::cin >> actionNum;
 
-        if (std::cin.fail() || actionNum < 1 || actionNum > permissions.size()) {
+        if (std::cin.fail() || actionNum < 0 || actionNum > permissions.size()) {
             cinClear();
             std::cout << "\nInvalid selection. Please try again.";
             continue;
@@ -89,7 +91,8 @@ int Menu::promptActionSelection()
     }
 }
 
-void Menu::executeAction(int num) {
+void Menu::executeAction(int num) const
+{
     clearConsole();
     displayRBACHeader();
     std::cout << "Executing action: " << permissions[num-1];
@@ -116,10 +119,17 @@ void Menu::displayMenu()
             }
             if (menuChoice == 1) {
                 int action = -1;
-                while (action < 1) { //Ensure valid action
+                while (action < 0) { //Ensure valid action
                     action = promptActionSelection();
+                    if (action >= 1)
+                    {
+                        executeAction(action); //execute the action.
+                        action = -1; //reset the action value for the next loop.
+                    }
+                    if (action == 0) //break loop that ask for action selection
+                        break;
                 }
-                executeAction(action);
+
             }
         }
     }
