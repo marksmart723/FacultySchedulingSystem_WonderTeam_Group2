@@ -7,10 +7,10 @@ Our WIP limits are unlimited tasks allowed for the todo, three tasks for in prog
 
 Team: 
     
-    Mark:
+    Mark:    Project Owner, Developer
 
-    Natalie:
+    Natalie:    Developer
 
-    David:
+    David:    Developer
     
-    Hieu:
+    Hieu:    Developer
