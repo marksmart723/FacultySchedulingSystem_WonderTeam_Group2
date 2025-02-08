@@ -13,7 +13,7 @@ public:
     Menu();
     void promptLogin();
     bool promptMenuInteraction();
-    void displayAvailableActions(std::string role); //to do, awaiting role class
+    void displayAvailableActions();
     void logout();
     void displayMenu();
 };
