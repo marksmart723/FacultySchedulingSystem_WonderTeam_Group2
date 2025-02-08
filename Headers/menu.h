@@ -8,14 +8,17 @@ class Menu
 {
 private:
     User currentUser;
-    std::vector<std::string> permissions;
+    std::vector<std::string> permissions; //Holds the currentUser permissions.
+    //Maybe in the future there will be a map or vector to store pointers to functions.
+    //PromptMenuInteraction will return the key to access these functions.
 
 public:
     Menu();
-    void promptLogin();
-    int promptMenuInteraction();
-    int promptActionSelection();
-    void executeAction(int num);
-    void logout();
-    void displayMenu();
+
+    void promptLogin(); //Ask user to enter their login information.
+    int promptMenuInteraction(); //Ask user which menu choice they want. Return the choice.
+    int promptActionSelection(); //Ask user which action choice they want. Return the choice.
+    void executeAction(int num); //Use the returned value from promptActionSelection. Execute the permissions.
+    void logout(); //Reinitialize the currentUser private member.
+    void displayMenu(); //Start the menu.
 };

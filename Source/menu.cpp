@@ -14,7 +14,7 @@ void displayRBACHeader()
 
 void clearConsole()
 {
-    Sleep(700);
+    Sleep(600);
     std::system("cls");
 }
 
@@ -100,25 +100,27 @@ void Menu::logout() {
     displayRBACHeader();
     std::cout << "User <" << currentUser.getUsername() << "> have logged out.";
     currentUser = User(); //reinitialize currentUser class member.
-    displayMenu();
+    permissions.clear();
 }
 
 void Menu::displayMenu()
 {
-    while (!currentUser.isLoggedIn())
-        promptLogin();
-    while (true) {
-        int menuChoice = promptMenuInteraction();
-        if (menuChoice == 2) {  //User wants to log out
-            logout();
-            return;
-        }
-        if (menuChoice == 1) {
-            int action = -1;
-            while (action < 1) { //Ensure valid action
-                action = promptActionSelection();
+    while (true) //main event loop
+    {
+        if (!currentUser.isLoggedIn())
+            promptLogin();
+        while (currentUser.isLoggedIn()) {
+            int menuChoice = promptMenuInteraction();
+            if (menuChoice == 2) {  //User wants to log out
+                logout();
             }
-            executeAction(action);
+            if (menuChoice == 1) {
+                int action = -1;
+                while (action < 1) { //Ensure valid action
+                    action = promptActionSelection();
+                }
+                executeAction(action);
+            }
         }
     }
 }
