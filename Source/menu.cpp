@@ -5,6 +5,13 @@
 
 Menu::Menu(): permissions() {}
 
+void displayRBACHeader()
+{
+    std::cout << "==========================================\n";
+    std::cout << "                  ~RBAC~    \n";
+    std::cout << "==========================================\n\n";
+}
+
 void clearConsole()
 {
     Sleep(700);
@@ -19,21 +26,22 @@ void cinClear()
 
 void Menu::promptLogin() {
     clearConsole();
+    displayRBACHeader();
 
     std::string username;
     std::string password;
 
-    std::cout << "RBAC: Welcome to the Faculty Scheduling System!" << "\n\n";
+    std::cout << "Welcome to the Faculty Scheduling System!" << "\n\n";
     std::cout << "Please enter your username: ";
     std::cin >> username;
     std::cout << "Please enter your password: ";
     std::cin >> password;
     std::cout << std::endl;
     if (currentUser.login(username, password)) {
-        std::cout << "RBAC: You have logged in as user <" << username << ">";
+        std::cout << "You have logged in as user <" << username << ">";
         permissions = currentUser.getRole().getPermissions();
     } else
-        std::cout << "RBAC: Login unsuccessful.";
+        std::cout << "Login unsuccessful.";
     std::cout << "\n\n";
 }
 
@@ -43,7 +51,8 @@ int Menu::promptMenuInteraction()
     while (true)
     {
         clearConsole();
-        std::cout << "RBAC: Please select an option by entering the corresponding number:\n\n";
+        displayRBACHeader();
+        std::cout << "Please select an option by entering the corresponding number:\n\n";
         std::cout << "1. Display my available actions\n";
         std::cout << "2. Log out\n\n";
         std::cout << "Enter your selection: ";
@@ -64,6 +73,7 @@ int Menu::promptActionSelection()
     int actionNum;
     while (true) {
         clearConsole();
+        displayRBACHeader();
         std::cout << "User <" << currentUser.getUsername() << "> Available actions:\n\n";
         for (size_t i = 0; i < permissions.size(); ++i) {
             std::cout << i + 1 << ". " << permissions[i] << "\n";
@@ -83,11 +93,13 @@ int Menu::promptActionSelection()
 
 void Menu::executeAction(int num) {
     clearConsole();
+    displayRBACHeader();
     std::cout << "Executing action: " << permissions[num-1];
 }
 
 void Menu::logout() {
     clearConsole();
+    displayRBACHeader();
     std::cout << "User <" << currentUser.getUsername() << "> have logged out.";
     currentUser = User(); //reinitialize currentUser class member.
     displayMenu();
