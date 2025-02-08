@@ -30,5 +30,7 @@
 *.exe
 *.out
 
+#folder
+.vscode/
 
 
