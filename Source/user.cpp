@@ -53,6 +53,7 @@ bool User::login(const std::string& uname, const std::string& pwd) {
         }
     }
     std::cout << "Invalid username or password.\n";
+
     file.close();
     return false;
 }
@@ -76,4 +77,3 @@ std::string User::getRolename() const {
 const Role& User::getRole() const {
     return role;
 }
-
