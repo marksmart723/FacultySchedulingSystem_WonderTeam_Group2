@@ -42,7 +42,6 @@ void Menu::promptLogin() {
         permissions = currentUser.getRole().getPermissions();
     } else
         std::cout << "Login unsuccessful.";
-    std::cout << "\n\n";
 }
 
 int Menu::promptMenuInteraction()
