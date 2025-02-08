@@ -1,4 +1,4 @@
-#include "../Headers/menu.h"
+#include "menu.h"
 
 Menu::Menu() {}
 
@@ -54,7 +54,7 @@ void Menu::displayAvailableActions(std::string role)
 
 void Menu::logout()
 {
-    std::cout << "User <" << currentUser.getUserName() << "> have logged out.\n\n";
+    std::cout << "User <" << currentUser.getUsername() << "> have logged out.\n\n";
     currentUser = User(); //reinitialize currentUser class member. 
     displayMenu();
 }
