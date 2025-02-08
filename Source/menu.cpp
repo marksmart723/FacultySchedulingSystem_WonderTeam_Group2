@@ -84,7 +84,6 @@ int Menu::promptActionSelection()
         if (std::cin.fail() || actionNum < 1 || actionNum > permissions.size()) {
             cinClear();
             std::cout << "\nInvalid selection. Please try again.";
-            clearConsole();
             continue;
         }
         return actionNum;
