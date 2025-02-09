@@ -4,7 +4,8 @@
 #include "Role.h"
 
 
-class User {
+class User 
+{
 private:
 
     bool loggedIn;
