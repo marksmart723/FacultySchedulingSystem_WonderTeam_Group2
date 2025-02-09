@@ -4,19 +4,24 @@
 
 const std::string filename = "UserInfo.txt";
 
-User::User() {
+User::User() 
+{
     loggedIn = false;
 }
 
-bool User::addUser(const std::string& uname, const std::string& pwd, const std::string& rl) {
+bool User::addUser(const std::string& uname, const std::string& pwd, const std::string& rl) 
+{
     std::ifstream file(filename);
-    if (!file) {
+    if (!file) 
+    {
         std::cerr << "Error: Could not open file for writing.\n";
         return false;
     }
     std::string storedUname;
-    while (file >> storedUname) {
-        if (uname == storedUname) {
+    while (file >> storedUname) 
+    {
+        if (uname == storedUname) 
+        {
             std::cout << "Username Taken." << "\n";
             file.close();
             return false;
@@ -33,15 +38,20 @@ bool User::addUser(const std::string& uname, const std::string& pwd, const std::
     std::cout << "User added successfully.\n";
     return true;
 }
-bool User::login(const std::string& uname, const std::string& pwd) {
+bool User::login(const std::string& uname, const std::string& pwd) 
+{
     std::ifstream file(filename);
-    if (!file) {
+    if (!file) 
+    {
         return false;
     }
 
     std::string storedUname, storedPwd, storedRole;
-    while (file >> storedUname >> storedPwd >> storedRole) {
-        if (uname == storedUname && pwd == storedPwd) {
+    while (file >> storedUname >> storedPwd >> storedRole) 
+    {
+        if (uname == storedUname && pwd == storedPwd) 
+        {
+
             role = Role(storedRole);
             username = uname;
             password = pwd;
@@ -54,23 +64,28 @@ bool User::login(const std::string& uname, const std::string& pwd) {
     return false;
 }
 
-std::string User::getUsername() {
+std::string User::getUsername() 
+{
     return username;
 }
 
-void User::changeRole(std::string& rl) {
+void User::changeRole(std::string& rl) 
+{
     role = Role(rl);
 }
 
-bool User::isLoggedIn() {
+bool User::isLoggedIn() 
+{
     return loggedIn;
 }
 
-std::string User::getRoleName()  {
+std::string User::getRoleName()  
+{
     return role.getRole();
 }
 
-const Role& User::getRole() {
+const Role& User::getRole() 
+{
     return role; 
 }
 
