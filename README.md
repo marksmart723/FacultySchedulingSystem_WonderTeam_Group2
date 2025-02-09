@@ -14,3 +14,18 @@ Team:
     David:    Developer
     
     Hieu:    Developer
+
+How to Build Project:
+
+### How to Build the Project
+
+1. Navigate to the project directory:
+   
+3. Generate build files using CMake:
+    ```bash
+    cmake ..
+    ```
+4. Build the project:
+    ```bash
+    cmake --build .
+    ```
