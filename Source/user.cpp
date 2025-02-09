@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-const std::string filename = "UserInfos.txt";
+const std::string filename = "UserInfo.txt";
 
 User::User() 
 {
@@ -43,7 +43,6 @@ bool User::login(const std::string& uname, const std::string& pwd)
     std::ifstream file(filename);
     if (!file) 
     {
-        std::cerr << "Error: Could not open file for reading.\n";
         return false;
     }
 
@@ -52,7 +51,7 @@ bool User::login(const std::string& uname, const std::string& pwd)
     {
         if (uname == storedUname && pwd == storedPwd) 
         {
-            std::cout << "Login successful." << "\n";
+
             role = Role(storedRole);
             username = uname;
             password = pwd;
@@ -61,7 +60,6 @@ bool User::login(const std::string& uname, const std::string& pwd)
             return true;
         }
     }
-    std::cout << "Invalid username or password.\n";
     file.close();
     return false;
 }
