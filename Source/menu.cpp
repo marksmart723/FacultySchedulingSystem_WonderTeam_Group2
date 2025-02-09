@@ -53,11 +53,13 @@ int Menu::promptMenuInteraction()
         displayRBACHeader();
         std::cout << "Please select an option by entering the corresponding number:\n\n";
         std::cout << "1. Display my available actions\n";
-        std::cout << "2. Log out\n\n";
-        std::cout << "Enter your selection: ";
+        std::cout << "2. Log out\n";
+
+        std::cout << "\n0. Exit the program\n";
+        std::cout << "\nSelection an option by entering its number: ";
         std::cin >> actionNum;
 
-        if (std::cin.fail() || actionNum < 1 || actionNum > 2)
+        if (std::cin.fail() || actionNum < 0 || actionNum > 2)
         {
             cinClear();
             std::cout << "\nInvalid input or selection. Please try again.";
@@ -108,16 +110,19 @@ void Menu::logout() {
 
 void Menu::displayMenu()
 {
-    while (true) //main event loop
+    bool running = true;
+    while (running) //main event loop
     {
         if (!currentUser.isLoggedIn())
             promptLogin();
-        while (currentUser.isLoggedIn()) {
+        while (currentUser.isLoggedIn() && running) {
             int menuChoice = promptMenuInteraction();
-            if (menuChoice == 2) {  //User wants to log out
+            if (menuChoice == 0)
+                running = false;//User want to exit program
+            else if (menuChoice == 2) {  //User wants to log out
                 logout();
             }
-            if (menuChoice == 1) {
+            else if (menuChoice == 1) {
                 int action = -1;
                 while (action < 0) { //Ensure valid action
                     action = promptActionSelection();
