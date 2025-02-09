@@ -78,7 +78,7 @@ const Role& User::getRole() {
 }
 
 bool User::checkPermission(const std::string& action) const {
-    const auto& permissions = role.getPermitions();
+    const auto& permissions = role.getPermissions();
     for (int i = 0; i < permissions.size(); ++i) {
         if (permissions[i] == action) {
             return true;
