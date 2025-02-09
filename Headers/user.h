@@ -23,4 +23,6 @@ public:
     bool isLoggedIn(); // will return true if logged in and false if not
     std::string getRoleName() ; // this will give you the users role 
     const Role& getRole() ; //this is a reference to the role class to access its member functions
+
+    bool checkPermission(const std::string& action) const;// check permission
 };
